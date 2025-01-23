@@ -10,8 +10,20 @@ class Application extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: textTheme(),
+      ),
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     );
+  }
+
+  TextTheme textTheme() {
+    return TextTheme(
+        headlineSmall: TextStyle(
+      fontFamily: 'Gilroy',
+      fontWeight: FontWeight.w400,
+      color: Colors.lightBlueAccent,
+    ));
   }
 }

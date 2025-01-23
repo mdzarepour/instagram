@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:instagram/components/colors.dart';
+import 'package:instagram/components/strings.dart';
 import 'package:instagram/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,20 +16,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    super.initState();
     _navigateToHomeScreen();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final backgroundColor = HexColor('#1C1F2E');
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          color: backgroundColor,
+          color: SolidColors.accentBlue,
           image: DecorationImage(
             opacity: 0.09,
             repeat: ImageRepeat.repeat,
@@ -49,22 +48,33 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget _buildLogo() {
-    return SvgPicture.asset(
-      'assets/images/Startlogo.svg',
-      semanticsLabel: 'App Logo',
+    return Expanded(
+      child: SvgPicture.asset(
+        'assets/images/Startlogo.svg',
+        semanticsLabel: 'App Logo',
+      ),
     );
   }
 
   Widget _buildFooterText() {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 30),
-      child: Text.rich(
+      padding: EdgeInsets.only(bottom: 30),
+      child: RichText(
         textAlign: TextAlign.center,
-        TextSpan(
-          text: """FROM      
-expertflutter.pro""",
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: UiString.splashFrom,
+              style: TextStyle(
+                color: Colors.grey,
+              ),
+            ),
+            TextSpan(
+              text: UiString.splashFlutter,
+              style: Theme.of(context).textTheme.headlineSmall,
+            )
+          ],
         ),
-        style: const TextStyle(color: Colors.grey),
       ),
     );
   }
