@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hexcolor/hexcolor.dart';
 import 'package:instagram/components/colors.dart';
 import 'package:instagram/components/strings.dart';
-import 'package:instagram/home_page.dart';
+import 'package:instagram/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -26,9 +25,9 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          color: SolidColors.accentBlue,
+          color: SolidColors.backGroundPurple,
           image: DecorationImage(
-            opacity: 0.09,
+            opacity: 0.10,
             repeat: ImageRepeat.repeat,
             image: const AssetImage('assets/images/pattern1.png'),
           ),
@@ -64,13 +63,10 @@ class _SplashScreenState extends State<SplashScreen> {
         text: TextSpan(
           children: [
             TextSpan(
-              text: UiString.splashFrom,
-              style: TextStyle(
-                color: Colors.grey,
-              ),
-            ),
+                text: SplashScreenStrings.splashFrom,
+                style: Theme.of(context).textTheme.headlineLarge),
             TextSpan(
-              text: UiString.splashFlutter,
+              text: SplashScreenStrings.splashFlutter,
               style: Theme.of(context).textTheme.headlineSmall,
             )
           ],
