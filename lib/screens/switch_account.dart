@@ -13,7 +13,7 @@ class SwitchAccount extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-        color: SolidColors.backGroundPurple,
+        color: SolidColors.backGroundColor,
         image: DecorationImage(
           opacity: 0.10,
           repeat: ImageRepeat.repeat,
@@ -40,9 +40,10 @@ class SwitchAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          height: size.height / 37,
+          height: size.height / 125,
         ),
         Image.asset(
+          width: size.width,
           'assets/images/switch_account_background.png',
         ),
         Expanded(
@@ -54,21 +55,21 @@ class SwitchAccount extends StatelessWidget {
             InkWell(
               onTap: () {},
               child: Text(
+                style: theme.textTheme.headlineLarge,
                 SwitchAccountScreenStrings.dontHavAccount,
-                style: theme.textTheme.headlineMedium,
               ),
             ),
             InkWell(
               onTap: () {},
               child: Text(
+                style: theme.textTheme.headlineMedium,
                 SwitchAccountScreenStrings.signUp,
-                style: theme.textTheme.headlineLarge,
               ),
             ),
           ],
         ),
         SizedBox(
-          height: size.height / 10.2,
+          height: size.height / 12.2,
         ),
       ],
     );
@@ -80,8 +81,8 @@ class SwitchAccount extends StatelessWidget {
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
           child: Container(
-            width: 340.0,
-            height: 351.0,
+            width: size.width / 1.25,
+            height: size.height / 2.59,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
                   Radius.circular(40),
@@ -91,31 +92,32 @@ class SwitchAccount extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/profile.png'),
+                  Image.asset(
+                      filterQuality: FilterQuality.high,
+                      'assets/images/profile.png'),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                    SwitchAccountScreenStrings.name,
                     style: theme.textTheme.headlineMedium,
+                    SwitchAccountScreenStrings.name,
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   ElevatedButton(
-                    style: theme.elevatedButtonTheme.style,
                     onPressed: () {},
                     child: Text(
-                      SwitchAccountScreenStrings.confirm,
                       style: theme.textTheme.headlineMedium,
+                      SwitchAccountScreenStrings.confirm,
                     ),
                   ),
                   SizedBox(
                     height: 32,
                   ),
                   Text(
-                    SwitchAccountScreenStrings.switchAccount,
                     style: theme.textTheme.headlineMedium,
+                    SwitchAccountScreenStrings.switchAccount,
                   )
                 ],
               ),

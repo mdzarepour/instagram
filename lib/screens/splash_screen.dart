@@ -21,11 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    TextTheme textTheme = Theme.of(context).textTheme;
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
         decoration: BoxDecoration(
-          color: SolidColors.backGroundPurple,
+          color: SolidColors.backGroundColor,
           image: DecorationImage(
             opacity: 0.10,
             repeat: ImageRepeat.repeat,
@@ -38,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
             children: [
               _buildLogo(),
               const SizedBox(height: 30),
-              _buildFooterText(),
+              _buildFooterText(textTheme),
             ],
           ),
         ),
@@ -55,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  Widget _buildFooterText() {
+  Widget _buildFooterText(TextTheme textTheme) {
     return Padding(
       padding: EdgeInsets.only(bottom: 30),
       child: RichText(
@@ -63,11 +64,14 @@ class _SplashScreenState extends State<SplashScreen> {
         text: TextSpan(
           children: [
             TextSpan(
-                text: SplashScreenStrings.splashFrom,
-                style: Theme.of(context).textTheme.headlineLarge),
+              style: textTheme.headlineLarge,
+              text: SplashScreenStrings.splashFrom,
+            ),
             TextSpan(
+              style: textTheme.headlineLarge!.copyWith(
+                color: SolidColors.blueColor,
+              ),
               text: SplashScreenStrings.splashFlutter,
-              style: Theme.of(context).textTheme.headlineSmall,
             )
           ],
         ),
