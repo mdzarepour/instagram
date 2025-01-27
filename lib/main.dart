@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:instagram/splash_screen.dart';
+import 'package:instagram/components/colors.dart';
+import 'package:instagram/screens/switch_account.dart';
 
 void main(List<String> args) {
   runApp(const Application());
@@ -14,16 +15,28 @@ class Application extends StatelessWidget {
         textTheme: textTheme(),
       ),
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: SwitchAccount(),
     );
   }
 
   TextTheme textTheme() {
     return TextTheme(
+        headlineMedium: TextStyle(
+          fontSize: 17,
+          color: Colors.white,
+          fontFamily: 'Gilroy',
+          fontWeight: FontWeight.w400,
+        ),
+        headlineLarge: TextStyle(
+          fontSize: 16,
+          color: SolidColors.grayLinkColor,
+          fontFamily: 'Gilroy',
+          fontWeight: FontWeight.w400,
+        ),
         headlineSmall: TextStyle(
-      fontFamily: 'Gilroy',
-      fontWeight: FontWeight.w400,
-      color: Colors.lightBlueAccent,
-    ));
+          fontFamily: 'Gilroy',
+          fontWeight: FontWeight.w400,
+          color: Colors.lightBlueAccent,
+        ));
   }
 }
