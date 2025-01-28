@@ -1,9 +1,17 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
 import 'package:instagram/components/global_widgets.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  bool passwordVisiblity = true;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,7 @@ class RegisterScreen extends StatelessWidget {
     );
   }
 
-  _bottomSection({required Size size, required ThemeData theme}) {
+  _bottomSection({required Size size, required theme}) {
     return Container(
       height: size.height / 2.0,
       decoration: BoxDecoration(
@@ -78,10 +86,21 @@ class RegisterScreen extends StatelessWidget {
             width: size.width / 1.25,
             height: size.height / 17,
             child: TextField(
-              obscureText: true,
+              obscureText: passwordVisiblity,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: SolidColors.whiteColor),
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                suffixIcon: InkWell(
+                  onTap: () {
+                    _visiblePassword();
+                  },
+                  child: Icon(
+                    CupertinoIcons.eye,
+                    color: Colors.white,
+                  ),
+                ),
+                labelText: 'Password',
+              ),
             ),
           ),
           SizedBox(
@@ -92,5 +111,15 @@ class RegisterScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _visiblePassword() {
+    setState(() {
+      if (passwordVisiblity == false) {
+        passwordVisiblity = true;
+      } else {
+        passwordVisiblity = false;
+      }
+    });
   }
 }
