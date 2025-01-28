@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
-import 'package:instagram/screens/switch_account.dart';
+import 'package:instagram/screens/register_screen.dart';
 
 void main(List<String> args) {
   runApp(const Application());
@@ -13,16 +13,30 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        inputDecorationTheme: textFieldTheme(context),
         textTheme: textTheme(),
         elevatedButtonTheme: elevatedButton(context),
       ),
       debugShowCheckedModeBanner: false,
-      home: SwitchAccount(),
+      home: RegisterScreen(),
     );
   }
 
   TextTheme textTheme() {
     return TextTheme(
+      bodyMedium: TextStyle(
+        fontFamily: 'GB',
+        fontSize: 14,
+        letterSpacing: 1.4,
+        fontWeight: FontWeight.w400,
+        color: SolidColors.pinkButtonColor,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: 'GB',
+        fontSize: 20,
+        fontWeight: FontWeight.w400,
+        color: SolidColors.whiteColor,
+      ),
       //for => white bold texts and buttons text
       headlineMedium: TextStyle(
         color: SolidColors.whiteColor,
@@ -45,10 +59,11 @@ class Application extends StatelessWidget {
           color: SolidColors.whiteColor),
       //for => white thin titles
       titleMedium: TextStyle(
-          fontFamily: 'GR',
-          fontSize: 12,
-          fontWeight: FontWeight.w400,
-          color: SolidColors.whiteColor),
+        fontFamily: 'GR',
+        fontSize: 12,
+        fontWeight: FontWeight.w400,
+        color: SolidColors.whiteColor,
+      ),
       //for => white bold title and numbers
       titleLarge: TextStyle(
           fontFamily: 'GB',
@@ -90,6 +105,34 @@ class Application extends StatelessWidget {
           backgroundColor: SolidColors.pinkButtonColor,
           fixedSize: Size(129, 46),
           elevation: 0),
+    );
+  }
+
+  textFieldTheme(BuildContext context) {
+    return InputDecorationTheme(
+      labelStyle: Theme.of(context)
+          .textTheme
+          .bodyMedium!
+          .copyWith(color: SolidColors.whiteColor),
+      floatingLabelStyle: TextStyle(
+        color: SolidColors.pinkButtonColor,
+        fontWeight: FontWeight.w400,
+        fontFamily: 'GB',
+        fontSize: 14,
+        letterSpacing: 1.4,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+        borderSide: BorderSide(color: SolidColors.whiteColor, width: 3),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
+        ),
+        borderSide: BorderSide(color: SolidColors.pinkButtonColor, width: 3),
+      ),
     );
   }
 }

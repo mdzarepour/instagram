@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
+import 'package:instagram/components/global_widgets.dart';
 import 'package:instagram/components/strings.dart';
 
 class SwitchAccount extends StatelessWidget {
@@ -49,25 +50,7 @@ class SwitchAccount extends StatelessWidget {
         Expanded(
           child: SizedBox(),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            InkWell(
-              onTap: () {},
-              child: Text(
-                style: theme.textTheme.headlineLarge,
-                SwitchAccountScreenStrings.dontHavAccount,
-              ),
-            ),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                style: theme.textTheme.headlineMedium,
-                SwitchAccountScreenStrings.signUp,
-              ),
-            ),
-          ],
-        ),
+        GlobalWidgets(theme: theme).buttonsRow(),
         SizedBox(
           height: size.height / 12.2,
         ),

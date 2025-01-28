@@ -8,10 +8,6 @@ class SolidColors {
   static Color whiteColor = Color(0xffFFFFFF);
   static Color purpleColor = Color(0xffF98BFC);
   static Color blueColor = Color(0xff55B9F7);
-
-  static Color backGroundPurple = Color(0xff1C1F2E);
-  static Color pu8rpleButton = Color(0xffF35383);
-  static Color grayLinkColor = Color(0xffC5C5C5);
 }
 
 class GradientColors {
@@ -21,8 +17,14 @@ class GradientColors {
     colors: [
       Color.fromRGBO(255, 255, 255, 0.5),
       Color.fromRGBO(255, 255, 255, 0.2),
-      Color.fromARGB(128, 255, 255, 255),
-      Color.fromARGB(97, 255, 255, 255),
+    ],
+  );
+  static LinearGradient registerScreenBackgroundGradient = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [
+      Color(0xff323A99),
+      Color(0xffF98BFC),
     ],
   );
 }
