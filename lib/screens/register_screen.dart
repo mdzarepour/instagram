@@ -11,19 +11,27 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool passwordVisiblity = true;
+  bool passwordVisibility = true;
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: <Widget>[
-          _backGround(),
-          _bottomSection(size: size, theme: theme),
-        ],
+      body: GestureDetector(
+        onTap: () {
+          _emailFocusNode.unfocus();
+          _passwordFocusNode.unfocus();
+        },
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            _backGround(),
+            _bottomSection(size: size, theme: theme),
+          ],
+        ),
       ),
     );
   }
@@ -56,6 +64,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(
             height: 50,
           ),
+          // => header
           Row(
             spacing: 5,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -70,10 +79,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(
             height: size.height / 17.73,
           ),
+          // => email input
           SizedBox(
             width: size.width / 1.25,
             height: size.height / 17,
             child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              focusNode: _emailFocusNode,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: SolidColors.whiteColor),
               decoration: InputDecoration(labelText: 'Email'),
@@ -82,11 +94,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           SizedBox(
             height: size.height / 20.95,
           ),
+          // => password input
           SizedBox(
             width: size.width / 1.25,
             height: size.height / 17,
             child: TextField(
-              obscureText: passwordVisiblity,
+              keyboardType: TextInputType.visiblePassword,
+              focusNode: _passwordFocusNode,
+              obscureText: passwordVisibility,
               style: theme.textTheme.bodyMedium!
                   .copyWith(color: SolidColors.whiteColor),
               decoration: InputDecoration(
@@ -115,11 +130,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   _visiblePassword() {
     setState(() {
-      if (passwordVisiblity == false) {
-        passwordVisiblity = true;
-      } else {
-        passwordVisiblity = false;
-      }
+      passwordVisibility == false
+          ? passwordVisibility = true
+          : passwordVisibility = false;
     });
   }
 }
