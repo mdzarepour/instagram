@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
-import 'package:instagram/screens/register_screen.dart';
+import 'package:instagram/screens/home_screen.dart';
 
 void main(List<String> args) {
   runApp(const Application());
@@ -13,12 +13,13 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        appBarTheme: appbarTheme(),
         inputDecorationTheme: textFieldTheme(context),
         textTheme: textTheme(),
         elevatedButtonTheme: elevatedButton(context),
       ),
       debugShowCheckedModeBanner: false,
-      home: RegisterScreen(),
+      home: HomeScreen(),
     );
   }
 
@@ -110,22 +111,12 @@ class Application extends StatelessWidget {
 
   textFieldTheme(BuildContext context) {
     return InputDecorationTheme(
-      labelStyle: Theme.of(context)
-          .textTheme
-          .bodyMedium!
-          .copyWith(color: SolidColors.whiteColor),
-      floatingLabelStyle: TextStyle(
-        color: SolidColors.pinkButtonColor,
-        fontWeight: FontWeight.w400,
-        fontFamily: 'GB',
-        fontSize: 14,
-        letterSpacing: 1.4,
-      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(15),
         ),
-        borderSide: BorderSide(color: SolidColors.whiteColor, width: 3),
+        borderSide: BorderSide(color: SolidColors.greyLinkColor, width: 3),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(
@@ -133,6 +124,15 @@ class Application extends StatelessWidget {
         ),
         borderSide: BorderSide(color: SolidColors.pinkButtonColor, width: 3),
       ),
+    );
+  }
+
+  appbarTheme() {
+    return AppBarTheme(
+      scrolledUnderElevation: 0,
+      elevation: 0,
+      titleSpacing: 20,
+      backgroundColor: Colors.transparent,
     );
   }
 }
