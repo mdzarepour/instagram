@@ -19,6 +19,15 @@ class GradientColors {
       Color.fromRGBO(255, 255, 255, 0.2),
     ],
   );
+  static LinearGradient glassyPostContainer = LinearGradient(
+    begin: Alignment.centerLeft,
+    end: Alignment.centerRight,
+    colors: [
+      Color.fromRGBO(255, 255, 255, 0.5),
+      Color.fromRGBO(255, 255, 255, 0.2),
+    ],
+  );
+
   static LinearGradient registerScreenBackgroundGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,

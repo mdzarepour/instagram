@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
 
@@ -17,18 +20,21 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Center(
-              child: SizedBox(
-                height: 90,
-                width: size.width,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return index == 0
-                        ? _addStoryBox(context)
-                        : _storyBox(context);
-                  },
+            Padding(
+              padding: const EdgeInsets.only(right: 11, left: 17),
+              child: Center(
+                child: SizedBox(
+                  height: 90,
+                  width: size.width,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return index == 0
+                          ? _addStoryBox(context)
+                          : _storyBox(context);
+                    },
+                  ),
                 ),
               ),
             ),
@@ -44,25 +50,20 @@ class HomeScreen extends StatelessWidget {
 }
 
 _postContainer(BuildContext context, Size size) {
-  //final TextTheme textTheme = Theme.of(context).textTheme;
-  return Container(
-    height: 400,
-    width: size.width,
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: Colors.amber,
-      ),
-    ),
+  final TextTheme textTheme = Theme.of(context).textTheme;
+  return SizedBox(
+    height: 494,
     child: Column(
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 64,
-              height: 64,
+              width: 44,
+              height: 44,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(17),
+                  Radius.circular(12),
                 ),
                 border: Border.all(
                   width: 2,
@@ -75,18 +76,91 @@ _postContainer(BuildContext context, Size size) {
               ),
             ),
             SizedBox(
-              width: 20,
+              width: 10,
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'username',
-                ),
-                Text('برنامهع نویسی اندر.وید'),
-              ],
-            )
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    style: textTheme.titleLarge,
+                    'username',
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                      style: textTheme.displayMedium,
+                      'امیراحمد برنامه‌نویس موبایل'),
+                ],
+              ),
+            ),
+            Image.asset('assets/images/icon_menu.png')
           ],
+        ),
+        SizedBox(
+          height: 23,
+        ),
+        Expanded(
+          child: Stack(
+            children: [
+              Image.asset('assets/images/post_cover.png'),
+              Positioned(
+                right: 15,
+                top: 15,
+                child: Image.asset('assets/images/icon_video.png'),
+              ),
+              Positioned(
+                right: 27,
+                left: 27,
+                bottom: 0,
+                child: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(
+                      height: 46,
+                      width: 340,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12),
+                        ),
+                        gradient: GradientColors.glassyPostContainer,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Row(
+                            spacing: 6,
+                            children: [
+                              Image.asset('assets/images/icon_hart.png'),
+                              Text(
+                                '2.6 K',
+                                style: textTheme.bodyMedium!
+                                    .copyWith(color: SolidColors.whiteColor),
+                              )
+                            ],
+                          ),
+                          Row(
+                            spacing: 5,
+                            children: [
+                              Image.asset('assets/images/icon_comments.png'),
+                              Text(
+                                '2.6 K',
+                                style: textTheme.bodyMedium!
+                                    .copyWith(color: SolidColors.whiteColor),
+                              )
+                            ],
+                          ),
+                          Image.asset('assets/images/icon_share.png'),
+                          Image.asset('assets/images/icon_save.png'),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ],
     ),
@@ -110,7 +184,7 @@ AppBar _appBar() {
 
 _addStoryBox(BuildContext context) {
   return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 17),
+    padding: const EdgeInsets.only(right: 5),
     child: Column(
       children: [
         Container(

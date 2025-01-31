@@ -24,11 +24,11 @@ class Application extends StatelessWidget {
   }
 
   TextTheme textTheme() {
+    // for => text fields and bold numbers
     return TextTheme(
       bodyMedium: TextStyle(
         fontFamily: 'GB',
         fontSize: 14,
-        letterSpacing: 1.4,
         fontWeight: FontWeight.w400,
         color: SolidColors.pinkButtonColor,
       ),
@@ -65,7 +65,7 @@ class Application extends StatelessWidget {
         fontWeight: FontWeight.w400,
         color: SolidColors.whiteColor,
       ),
-      //for => white bold title and numbers
+      //for => white bold title
       titleLarge: TextStyle(
           fontFamily: 'GB',
           fontSize: 12,
