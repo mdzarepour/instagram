@@ -111,6 +111,10 @@ class Application extends StatelessWidget {
 
   textFieldTheme(BuildContext context) {
     return InputDecorationTheme(
+      labelStyle: Theme.of(context)
+          .textTheme
+          .bodyMedium!
+          .copyWith(color: SolidColors.whiteColor),
       contentPadding: EdgeInsets.symmetric(horizontal: 20),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(

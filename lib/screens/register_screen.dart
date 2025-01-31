@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             theme.textTheme.bodyMedium!.copyWith(color: SolidColors.whiteColor),
         decoration: InputDecoration(
           labelText: 'Email',
-          labelStyle: _emailFocusNode.hasFocus
+          floatingLabelStyle: _emailFocusNode.hasFocus
               ? theme.textTheme.bodyMedium
               : theme.textTheme.bodyMedium!
                   .copyWith(color: SolidColors.whiteColor),
@@ -135,7 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       width: size.width / 1.25,
       height: size.height / 17,
       child: TextField(
-        keyboardType: TextInputType.visiblePassword,
+        keyboardType: TextInputType.text,
         focusNode: _passwordFocusNode,
         obscureText: passwordVisibility,
         style:
@@ -151,7 +151,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           labelText: 'Password',
-          labelStyle: _passwordFocusNode.hasFocus
+          floatingLabelStyle: _emailFocusNode.hasFocus
               ? theme.textTheme.bodyMedium
               : theme.textTheme.bodyMedium!
                   .copyWith(color: SolidColors.whiteColor),
