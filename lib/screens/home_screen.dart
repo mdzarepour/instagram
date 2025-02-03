@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
 
@@ -11,16 +10,27 @@ class HomeScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(color: SolidColors.backGroundColor),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: _buildAppBar(),
-        body: Column(
-          children: [
-            const SizedBox(height: 10),
-            _buildStoryListView(size),
-            const SizedBox(height: 50),
-            _buildPostContainer(context, size),
-          ],
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: _buildAppBar(),
+          body: Column(
+            children: [
+              const SizedBox(height: 10),
+              _buildStoryListView(size),
+              const SizedBox(height: 50),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 9,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return _buildPostContainer(context, size);
+                  },
+                ),
+              ),
+              //_buildPostContainer(context, size),
+            ],
+          ),
         ),
       ),
     );
@@ -114,6 +124,7 @@ class HomeScreen extends StatelessWidget {
   Widget _buildPostContainer(BuildContext context, Size size) {
     final textTheme = Theme.of(context).textTheme;
     return SizedBox(
+      width: 390,
       height: 494,
       child: Column(
         children: [
@@ -122,7 +133,12 @@ class HomeScreen extends StatelessWidget {
           Expanded(
             child: Stack(
               children: [
-                Image.asset('assets/images/post_cover.png'),
+                ClipRRect(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(17),
+                  ),
+                  child: Image.asset('assets/images/post_cover.png'),
+                ),
                 Positioned(
                   right: 15,
                   top: 15,
@@ -137,7 +153,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Row _buildPostHeader(TextTheme textTheme) {
+  _buildPostHeader(TextTheme textTheme) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -183,7 +199,7 @@ class HomeScreen extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          filter: ImageFilter.blur(sigmaX: 40, sigmaY: 15),
           child: Container(
             height: 46,
             width: 340,

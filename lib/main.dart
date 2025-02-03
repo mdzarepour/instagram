@@ -23,7 +23,7 @@ class Application extends StatelessWidget {
     );
   }
 
-  TextTheme textTheme() {
+  textTheme() {
     // for => text fields and bold numbers
     return TextTheme(
       bodyMedium: TextStyle(
