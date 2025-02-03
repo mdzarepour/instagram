@@ -18,13 +18,15 @@ class HomeScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 10),
               _buildStoryListView(size),
-              const SizedBox(height: 50),
+
               Expanded(
                 child: ListView.builder(
                   itemCount: 9,
-                  shrinkWrap: true,
                   itemBuilder: (context, index) {
-                    return _buildPostContainer(context, size);
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 23, top: 32),
+                      child: _buildPostContainer(context, size),
+                    );
                   },
                 ),
               ),
@@ -144,7 +146,7 @@ class HomeScreen extends StatelessWidget {
                   top: 15,
                   child: Image.asset('assets/images/icon_video.png'),
                 ),
-                _buildPostFooter(textTheme),
+                _buildPostFooter(textTheme, context),
               ],
             ),
           ),
@@ -154,44 +156,47 @@ class HomeScreen extends StatelessWidget {
   }
 
   _buildPostHeader(TextTheme textTheme) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Container(
-          width: 44,
-          height: 44,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(width: 2, color: SolidColors.pinkButtonColor),
+    return SizedBox(
+      width: 390,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(width: 2, color: SolidColors.pinkButtonColor),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(2.5),
+              child: Image.asset('assets/images/profile.png'),
+            ),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(2.5),
-            child: Image.asset('assets/images/profile.png'),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'username',
+                  style: textTheme.titleLarge,
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'امیراحمد برنامه‌نویس موبایل',
+                  style: textTheme.displayMedium,
+                ),
+              ],
+            ),
           ),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'username',
-                style: textTheme.titleLarge,
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'امیراحمد برنامه‌نویس موبایل',
-                style: textTheme.displayMedium,
-              ),
-            ],
-          ),
-        ),
-        Image.asset('assets/images/icon_menu.png'),
-      ],
+          Image.asset('assets/images/icon_menu.png'),
+        ],
+      ),
     );
   }
 
-  Positioned _buildPostFooter(TextTheme textTheme) {
+  Positioned _buildPostFooter(TextTheme textTheme, BuildContext context) {
     return Positioned(
       right: 27,
       left: 27,
@@ -220,7 +225,33 @@ class HomeScreen extends StatelessWidget {
                   '2.6 K',
                   textTheme.bodyMedium!.copyWith(color: SolidColors.whiteColor),
                 ),
-                Image.asset('assets/images/icon_share.png'),
+                InkWell(
+                  onTap: () {
+                    showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      barrierColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return ClipRRect(
+                          borderRadius: BorderRadius.horizontal(
+                            left: Radius.circular(36),
+                            right: Radius.circular(36),
+                          ),
+                          child: BackdropFilter(
+                            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                gradient: GradientColors.glassyContainer,
+                              ),
+                              height: 280,
+                            ),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Image.asset('assets/images/icon_share.png'),
+                ),
                 Image.asset('assets/images/icon_save.png'),
               ],
             ),
