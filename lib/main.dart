@@ -66,6 +66,7 @@ class Application extends StatelessWidget {
         color: SolidColors.whiteColor,
       ),
       //for => white bold title
+
       titleLarge: TextStyle(
           fontFamily: 'GB',
           fontSize: 12,
@@ -78,6 +79,11 @@ class Application extends StatelessWidget {
         fontWeight: FontWeight.w600,
         color: SolidColors.whiteColor,
       ),
+      displayLarge: TextStyle(
+          fontFamily: 'GB',
+          fontSize: 24,
+          fontWeight: FontWeight.w400,
+          color: SolidColors.whiteColor),
       //for => medium persian texts
       displayMedium: TextStyle(
         fontFamily: 'SMedium',

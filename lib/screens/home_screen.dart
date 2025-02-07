@@ -2,9 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:instagram/components/colors.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -14,24 +19,30 @@ class HomeScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: _buildAppBar(),
-          body: Column(
-            children: [
-              const SizedBox(height: 10),
-              _buildStoryListView(size),
-
-              Expanded(
-                child: ListView.builder(
-                  itemCount: 9,
-                  itemBuilder: (context, index) {
+          body: Expanded(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(
+                  child: _buildStoryListView(size),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 30,
+                  ),
+                ),
+                SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                  childCount: 9,
+                  (context, index) {
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 23, top: 32),
+                      padding: EdgeInsets.only(
+                          top: index == 0 ? 10 : 20, bottom: 20),
                       child: _buildPostContainer(context, size),
                     );
                   },
-                ),
-              ),
-              //_buildPostContainer(context, size),
-            ],
+                ))
+              ],
+            ),
           ),
         ),
       ),
@@ -225,33 +236,7 @@ class HomeScreen extends StatelessWidget {
                   '2.6 K',
                   textTheme.bodyMedium!.copyWith(color: SolidColors.whiteColor),
                 ),
-                InkWell(
-                  onTap: () {
-                    showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      barrierColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return ClipRRect(
-                          borderRadius: BorderRadius.horizontal(
-                            left: Radius.circular(36),
-                            right: Radius.circular(36),
-                          ),
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                gradient: GradientColors.glassyContainer,
-                              ),
-                              height: 280,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  },
-                  child: Image.asset('assets/images/icon_share.png'),
-                ),
+                _shareBottomSheet(context),
                 Image.asset('assets/images/icon_save.png'),
               ],
             ),
@@ -268,6 +253,135 @@ class HomeScreen extends StatelessWidget {
         const SizedBox(width: 6),
         Text(text, style: textStyle),
       ],
+    );
+  }
+
+  //share bottom sheet = >>
+  _shareBottomSheet(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          barrierColor: Colors.transparent,
+          context: context,
+          isScrollControlled: true,
+          builder: (context) {
+            return DraggableScrollableSheet(
+              initialChildSize: 0.2,
+              minChildSize: 0.1,
+              maxChildSize: 0.6,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(36),
+                    topLeft: Radius.circular(36),
+                  ),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topRight: Radius.circular(36),
+                          topLeft: Radius.circular(36),
+                        ),
+                        gradient: GradientColors.glassyPostContainer,
+                      ),
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                              top: 32,
+                              right: 40.0,
+                              left: 40.0,
+                            ),
+                            child: CustomScrollView(
+                              controller: scrollController,
+                              slivers: [
+                                SliverToBoxAdapter(
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            'Share',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .displayLarge,
+                                          ),
+                                          Image.asset(
+                                            'assets/images/icon_share_bottomsheet.png',
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SliverToBoxAdapter(child: SizedBox(height: 22)),
+                                _buildUsersGridView(),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            top: 10,
+                            left: 180,
+                            right: 180,
+                            child: _buildWhiteDragIcon(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+      child: Image.asset('assets/images/icon_share.png'),
+    );
+  }
+
+  _buildWhiteDragIcon() {
+    return Container(
+      width: 60,
+      height: 5,
+      color: SolidColors.whiteColor,
+    );
+  }
+
+  _buildUsersGridView() {
+    return SliverGrid(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.black),
+            ),
+            width: 100,
+            height: 100,
+            child: Column(
+              children: [
+                Image.asset('assets/images/profile.png'),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'username',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: 0.75,
+          crossAxisCount: 4),
     );
   }
 }
